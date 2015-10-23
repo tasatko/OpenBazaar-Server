@@ -18,7 +18,6 @@ from dht.utils import digest
 from market.profile import Profile
 from market.contracts import Contract
 from collections import OrderedDict
-from upnp import PortMapper
 
 DEFAULT_RECORDS_COUNT = 20
 DEFAULT_RECORDS_OFFSET = 0
@@ -503,7 +502,6 @@ class OpenBazaarAPI(APIResource):
 
     @GET('^/api/v1/shutdown')
     def shutdown(self, request):
-        PortMapper().clean_my_mappings(self.kserver.node.port)
         self.protocol.shutdown()
         reactor.stop()
 
